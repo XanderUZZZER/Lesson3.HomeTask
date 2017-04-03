@@ -13,7 +13,7 @@ namespace Lesson3.HomeTask
             Console.WriteLine("Tricks with cards\n");
 
             Card[] Deck = new Card[52];
-            //sorted deck            
+            //creating a new sorted deck            
             for (int rankVal = 1; rankVal < 14; rankVal++)
             {
                 for (int suitVal = 0; suitVal < 4; suitVal++)
