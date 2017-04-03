@@ -41,14 +41,15 @@ namespace Lesson3.HomeTask
             
             //shuffled deck
             Card tempCard;
-            int n = 52;
+            int n = 51;
             Random randomCard = new Random();
-            while (n > 1)
+            while (n > 0)
             {
-                int tempIndex = randomCard.Next(n--);
+                int tempIndex = randomCard.Next(n);
                 tempCard = Deck[n];
                 Deck[n] = Deck[tempIndex];
                 Deck[tempIndex] = tempCard;
+                n--;
             }
             Console.WriteLine("\n\tShuffled deck\n   ----------------------------------------------");
             counter = 0;
@@ -110,6 +111,51 @@ namespace Lesson3.HomeTask
                     counter++;
                 }
             }
+
+            int UsersQty = 0;
+            Console.WriteLine("Input number of users:");
+            UsersQty = int.Parse(Console.ReadLine());
+
+
+            n = 51;
+            randomCard = new Random();
+            while (n > 0)
+            {
+                int tempIndex = randomCard.Next(n);
+                tempCard = Deck[n];
+                Deck[n] = Deck[tempIndex];
+                Deck[tempIndex] = tempCard;
+                n--;
+            }
+
+            Card[,] Users = new Card[UsersQty,6];
+            counter = 0;
+            for (int i = 0; i < UsersQty; i++)
+            {
+                for(int j = 0; j<6; j++)
+                {
+                    Users[i,j] = Deck[counter];
+                    counter++;
+                }
+            }
+
+            Console.WriteLine("\n\tUser\n   ----------------------------------------------");
+            counter = 0;
+            PosTop = Console.CursorTop;
+            PosLeft = Console.CursorLeft;
+            for (int i = 0; i < UsersQty; i++)
+            {
+                Console.CursorTop = PosTop;
+                for (int j = 0; j < 6; j++)
+                {
+                    Console.CursorLeft = (PosLeft + 5) + (i * 25);
+                    string UserCard = Users[i,j].rank + " of " + Users[i,j].suit;
+                    Console.WriteLine(" #" + (counter + 1) + " " + UserCard);
+                    counter++;
+                }
+            }
+
+
             Console.ReadLine();
         }
 
