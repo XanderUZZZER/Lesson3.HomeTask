@@ -10,9 +10,10 @@ namespace Lesson3.HomeTask
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Tricks with cards\n");
+            Console.WriteLine("\t\t\tTricks with cards\n");
 
             Card[] Deck = new Card[52];
+
             //creating a new sorted deck            
             for (int rankVal = 1; rankVal < 14; rankVal++)
             {
@@ -22,20 +23,22 @@ namespace Lesson3.HomeTask
                 }
             }
 
-            Console.WriteLine("\tSorted deck\n----------------------------------------------");
+            Console.WriteLine("\tSorted deck\n   ----------------------------------------------");
             int counter = 0;
-            for (int i = 0; i < 13; i++)
-            {                
-                for (int j = 0; j < 4; j++)
+            int PosTop = Console.CursorTop;
+            int PosLeft = Console.CursorLeft;
+            for (int i = 0; i < 4; i++)
+            {
+                Console.CursorTop = PosTop;
+                for (int j = 0; j < 13; j++)
                 {
+                    Console.CursorLeft = (PosLeft + 5) + (i * 25);
                     string cardName = Deck[counter].rank + " of " + Deck[counter].suit;
-                    Console.Write(" {1} {0,-19}\t",cardName, (counter +1 ));
+                    Console.WriteLine(" #" + (counter + 1) + " " + cardName);
                     counter++;
                 }
-                Console.WriteLine();
             }
-                
-
+            
             //shuffled deck
             Card tempCard;
             int n = 52;
@@ -47,25 +50,35 @@ namespace Lesson3.HomeTask
                 Deck[n] = Deck[tempIndex];
                 Deck[tempIndex] = tempCard;
             }
-            Console.WriteLine("\n\tShuffled deck\n----------------------------------------------");
+            Console.WriteLine("\n\tShuffled deck\n   ----------------------------------------------");
             counter = 0;
-            for (int i = 0; i < 13; i++)
-            {                
-                for (int j = 0; j < 4; j++)
+            PosTop = Console.CursorTop;
+            PosLeft = Console.CursorLeft;
+            for (int i = 0; i < 4; i++)
+            {
+                Console.CursorTop = PosTop;
+                for (int j = 0; j < 13; j++)
                 {
+                    Console.CursorLeft = (PosLeft + 5) + (i * 25);
                     string cardName = Deck[counter].rank + " of " + Deck[counter].suit;
-                    Console.Write(" {1} {0,-19}\t", cardName, (counter + 1));
+                    if (Deck[counter].rank == Rank.Ace)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.WriteLine(" #" + (counter + 1) + " " + cardName);
+                        Console.ResetColor();
+                    }
+                    else
+                        Console.WriteLine(" #" + (counter + 1) + " " + cardName);
                     counter++;
                 }
-                Console.WriteLine();
             }
 
             //Find the positions of all the aces in the deck
-            Console.WriteLine("\n\tAces positions\n----------------------------------------------");
+            Console.WriteLine("\n\tAces positions\n   ----------------------------------------------");
             for (int i = 0; i < 52; i++)
             {
                 if (Deck[i].rank == Rank.Ace)
-                    Console.WriteLine("The position of Ace of " + Deck[i].suit + " is #" + (i+1));
+                    Console.WriteLine("     The position of Ace of " + Deck[i].suit + " is #" + (i+1));
             }
 
             //Move all the Spades cards to the beginning of the deck
@@ -82,21 +95,22 @@ namespace Lesson3.HomeTask
                 }
             }
 
-            Console.WriteLine("\n\tSprades sorted deck\n----------------------------------------------");
+            Console.WriteLine("\n\tSpades sorted deck\n   ----------------------------------------------");
             counter = 0;
-            for (int i = 0; i < 13; i++)
+            PosTop = Console.CursorTop;
+            PosLeft = Console.CursorLeft;
+            for (int i = 0; i < 4; i++)
             {
-                for (int j = 0; j < 4; j++)
+                Console.CursorTop = PosTop;
+                for (int j = 0; j < 13; j++)
                 {
+                    Console.CursorLeft = (PosLeft + 5) + (i * 25);
                     string cardName = Deck[counter].rank + " of " + Deck[counter].suit;
-                    Console.Write(" {1} {0,-19}\t", cardName, (counter + 1));
+                    Console.WriteLine(" #" + (counter + 1) + " " + cardName);
                     counter++;
                 }
-                Console.WriteLine();
             }
-
             Console.ReadLine();
-
         }
 
         enum Suit
